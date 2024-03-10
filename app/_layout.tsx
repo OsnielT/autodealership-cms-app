@@ -7,6 +7,10 @@ import { useEffect } from 'react';
 
 import { useColorScheme } from '@/components/useColorScheme';
 
+import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed"
+import { config } from "@gluestack-ui/config" // Optional if you want to use default theme
+
+
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -49,10 +53,15 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <GluestackUIProvider config={config}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ title:"Home", headerShown: false }} />
+        <Stack.Screen name="addVehicle" options={{ title:"Add Vehicle", animation:'slide_from_bottom' }} />
+        <Stack.Screen name="inventory" options={{ title:"Inventory" }} />
+        <Stack.Screen name="inquiries" options={{ title:"Inquiries" }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
+    </GluestackUIProvider>
     </ThemeProvider>
   );
 }
